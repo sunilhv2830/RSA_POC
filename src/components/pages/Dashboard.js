@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+
 
 function Dashboard() {
 
+    let history = useHistory();
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
@@ -11,39 +13,46 @@ function Dashboard() {
     }, []);
 
     const loadUsers = async () => {
-        const result = await axios.get('https://jsonplaceholder.typicode.com/users');
-        //it will wait until the requesting is completed until it gets response
+        const result = await axios.get("http://localhost:3002/users");
+        //await : it will wait until the requesting is completed until it gets response
         setUsers(result.data);
+    }
+
+    const deleteUser = async id => {
+        await axios.delete(`http://localhost:3002/users/${id}`);
+        loadUsers();
+        history.push('/')
     }
 
     return (
         <div className="container mt-2">
-            <table class="table border shadow">
-                <thead class="table-dark ">
+            <table className="table border shadow">
+                <thead className="table-dark ">
                     <tr>
                         <th scope="col">id</th>
                         <th scope="col">Name</th>
                         <th scope="col">User Name</th>
-                        <th scope="col">Phone</th>
+                        <th scope="col">Age</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Address</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th scope="col">Salary</th>
+                        <th></th><th></th><th></th>                       
                     </tr>
                 </thead>
                 <tbody>
                     {users.map((user, index) => (
                         <tr>
-                            <th scope="row">{index + 1}</th>
-                            <td>{user.name}</td>
+                            <th scope="row">{index += 1}</th>
+                            <td key={user.id}>{user.name}</td>
                             <td>{user.username}</td>
-                            <td>{user.phone}</td>
+                            <td>{user.age}</td>
                             <td>{user.email}</td>
-                            <td>{user.address.city}</td>
-                            <td ><Link to="/user/edit" class="fa fa-edit" style={{ color: 'green' }}></Link> </td>
-                            <td><Link to="/user/delete" class="fa fa-trash" style={{ color: 'red' }}></Link></td>
-                            <td><Link to="/user/view" class="fa fa-eye" ></Link></td>
+                            <td>{user.salary}</td>
+
+                            <td ><Link to={`/users/edit/${user.id}`} className="fa fa-edit" style={{ color: 'green' }}></Link> </td>
+                            <td><Link to="/users/delete" className="fa fa-trash"
+                                style={{ color: 'red' }}
+                                onClick={() => deleteUser(user.id)}></Link></td>
+                            <td><Link to={`/users/view/${user.id}`} className="fa fa-eye" ></Link></td>
 
                         </tr>
                     ))}

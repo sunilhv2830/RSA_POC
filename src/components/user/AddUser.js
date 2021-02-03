@@ -6,69 +6,77 @@ function AddUser() {
 
     let history = useHistory();
     const [user, setUser] = useState({
-        name: "",
-        username: "",
-        email: "",
-        phone: "",
-        city: "",
+        name:'',
+        username:'',
+        email:'',
+        age:'',
+        salary:''
+      
     });
 
-    const { name, username, email, phone, city } = user;
+    const { name, username, email, age,salary } = user;
 
     const onInputChange = e => {
-        setUser({ ...user, [e.target.name]: e.target.value })//... merges previous data with new data
+        setUser({ ...user, [e.target.name]: e.target.value });//... merges previous data with new data
     }
 
-    const onSubmit = async e => {
+    const submitHandler =  e => {
         e.preventDefault();
-        await axios.post('https://localhost:3002/users', user);
-        history.push("/");
+       console.log(user);
+       axios.post('http://localhost:3002/users',user)
+       .then(response => {
+        history.push('/')
+        console.log(response) 
+       })
+       .catch(error => {
+           console.log(error)
+       })
     };
 
 
 
     return (
         <div className="container">
-            <h1 class="App">Add User</h1>
-            <form onSubmit={e => onSubmit(e)}>
-                <div class="mb-3">
-                    <label for="inputName" className="form-label">Name</label>
-                    <input type="text" className="form-control" id="inputName"
+            <h1 className="App">Add User</h1>
+            <form onSubmit={submitHandler}>
+                <div className="mb-3">
+                    <label  className="form-label">Name</label>
+                    <input type="text" className="form-control" 
                         placeholder="Enter Name"
                         name="name" value={name}
                         onChange={e => onInputChange(e)} />
                 </div>
 
-                <div class="mb-3">
-                    <label for="inputUserName" className="form-label">User Name</label>
-                    <input type="text" className="form-control" id="inputUserName" placeholder="Enter User Name"
+                <div className="mb-3">
+                    <label  className="form-label">User Name</label>
+                    <input type="text" className="form-control"  placeholder="Enter User Name"
                         name="username"
                         value={username}
                         onChange={e => onInputChange(e)} />
                 </div>
 
-                <div class="mb-3">
-                    <label for="inputName" className="form-label">Phone Number</label>
-                    <input type="text" className="form-control" id="inputName" placeholder="Enter Phone Number"
-                        name="phone"
-                        value={phone}
+                <div className="mb-3">
+                    <label  className="form-label">Age</label>
+                    <input type="text" className="form-control"  placeholder="Enter Age"
+                        name="age"
+                        value={age}
                         onChange={e => onInputChange(e)} />
                 </div>
 
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" className="form-label">Email address</label>
-                    <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter Email Address"
+                <div className="mb-3">
+                    <label  className="form-label">Email address</label>
+                    <input type="email" className="form-control"  placeholder="Enter Email Address"
                         name="email" value={email}
                         onChange={e => onInputChange(e)} />
                 </div>
 
-                <div class="mb-3">
-                    <label for="exampleInputAddress" className="form-label">Address</label>
-                    <input type="text" className="form-control" id="exampleInputAddress" placeholder="Enter City"
-                        name="city"
-                        value={city}
+                <div className="mb-3">
+                    <label  className="form-label">Salary</label>
+                    <input type="text" className="form-control" placeholder="Enter Salary"
+                        name="salary" value={salary}
                         onChange={e => onInputChange(e)} />
                 </div>
+
 
                 <button className="btn btn-block btn-primary" type="submit">Add User</button>
             </form>

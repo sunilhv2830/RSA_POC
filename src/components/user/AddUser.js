@@ -6,15 +6,15 @@ function AddUser() {
 
     let history = useHistory();
     const [user, setUser] = useState({
-        name:'',
+        firstname:'',
         username:'',
-        email:'',
+        dob:'',
         age:'',
         salary:''
       
     });
 
-    const { name, username, email, age,salary } = user;
+    const { firstname, lastname, username, dob, age,salary } = user;
 
     const onInputChange = e => {
         setUser({ ...user, [e.target.name]: e.target.value });//... merges previous data with new data
@@ -40,10 +40,18 @@ function AddUser() {
             <h1 className="App">Add User</h1>
             <form onSubmit={submitHandler}>
                 <div className="mb-3">
-                    <label  className="form-label">Name</label>
+                    <label  className="form-label">First Name</label>
                     <input type="text" className="form-control" 
-                        placeholder="Enter Name"
-                        name="name" value={name}
+                        placeholder="Enter First Name"
+                        name="firstname" value={firstname}
+                        onChange={e => onInputChange(e)} />
+                </div>
+
+                <div className="mb-3">
+                    <label  className="form-label">Last Name</label>
+                    <input type="text" className="form-control" 
+                        placeholder="Enter Last Name"
+                        name="lastname" value={lastname}
                         onChange={e => onInputChange(e)} />
                 </div>
 
@@ -56,6 +64,13 @@ function AddUser() {
                 </div>
 
                 <div className="mb-3">
+                    <label  className="form-label">DOB</label>
+                    <input type="date" className="form-control"  placeholder="Enter DOB"
+                        name="dob" value={dob}
+                        onChange={e => onInputChange(e)} />
+                </div>
+
+                <div className="mb-3">
                     <label  className="form-label">Age</label>
                     <input type="text" className="form-control"  placeholder="Enter Age"
                         name="age"
@@ -63,12 +78,7 @@ function AddUser() {
                         onChange={e => onInputChange(e)} />
                 </div>
 
-                <div className="mb-3">
-                    <label  className="form-label">Email address</label>
-                    <input type="email" className="form-control"  placeholder="Enter Email Address"
-                        name="email" value={email}
-                        onChange={e => onInputChange(e)} />
-                </div>
+                
 
                 <div className="mb-3">
                     <label  className="form-label">Salary</label>

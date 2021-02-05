@@ -1,17 +1,19 @@
 {
   "users": [
     {
-      "name": "SUNIL H V",
+      "firstname": "SUNIL",
+      "lastname": "H V",
       "username": "sunil28",
-      "email": "sunilhv1995@gmail.com",
+      "dob": "28-02-1995",
       "age": "25",
       "salary": "300000",
       "id": 1
     },
     {
-      "name": "Ramesh",
+      "firstname": "Ramesh",
+      "lastname": "S",
       "username": "ram25",
-      "email": "ramesh@gmail.com",
+      "dob": "15-09-1993",
       "age": "28",
       "salary": "250000",
       "id": 4

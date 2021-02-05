@@ -30,10 +30,11 @@ function Dashboard() {
                 <thead className="table-dark ">
                     <tr>
                         <th scope="col">id</th>
-                        <th scope="col">Name</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
                         <th scope="col">User Name</th>
+                        <th scope="col">DOB</th>
                         <th scope="col">Age</th>
-                        <th scope="col">Email</th>
                         <th scope="col">Salary</th>
                         <th></th><th></th><th></th>                       
                     </tr>
@@ -42,10 +43,11 @@ function Dashboard() {
                     {users.map((user, index) => (
                         <tr>
                             <th scope="row">{index += 1}</th>
-                            <td key={user.id}>{user.name}</td>
+                            <td key={user.id}>{user.firstname}</td>
+                            <td key={user.id}>{user.lastname}</td>
                             <td>{user.username}</td>
+                            <td>{user.dob}</td>
                             <td>{user.age}</td>
-                            <td>{user.email}</td>
                             <td>{user.salary}</td>
 
                             <td ><Link to={`/users/edit/${user.id}`} className="fa fa-edit" style={{ color: 'green' }}></Link> </td>
